@@ -94,11 +94,8 @@ public class Main {
 
                 }
                 catch (Exception e) {
-
                 }
             }
-
-
         }
 
 
@@ -137,9 +134,7 @@ public class Main {
     public static class MonthGroupMapper
             extends Mapper<Object, Text, IntWritable, IntWritable>{
         public  void map(Object key, Text value, Context context) {
-
             String[] valueStr = value.toString().split("\t");
-
             if(valueStr.length == 2) {
                 try {
                     String dateStr = valueStr[0];
@@ -151,21 +146,16 @@ public class Main {
 
                     int month = date.getMonth();
 
-                    int thresholdValue = 1;
+                    float thresholdValue = 0.18f;
                     if(temperature >= thresholdValue) {
                         context.write(new IntWritable(month), new IntWritable(1));
                     }
                     else if (temperature <= -1 * thresholdValue) {
                         context.write(new IntWritable(month), new IntWritable(-1));
                     }
-
                 }
-                catch (Exception e) {
-
-                }
+                catch (Exception e) {}
             }
-
-
         }
     }
 
